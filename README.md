@@ -9,7 +9,7 @@
 
 ## Application Demo:
 
-![](https://hrcdn.net/s3_pub/istreet-assets/aiYyB8bIMufQ00lpPduPbQ/weather-component.gif)
+![](/src/assets/images/demo.gif)
 
 ## Functionality Requirements
 
