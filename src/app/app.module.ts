@@ -1,13 +1,15 @@
 
-import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { WeatherDetails } from './weatherDetails/weatherDetails.component';
 //Angular Router Module
-import { RouterModule, Router } from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ServerTimingInterceptor } from './weatherDetails/interceptor/serverInterceptor';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import {RouterTestingModule} from '@angular/router/testing';
     BrowserModule,
     FormsModule,
     RouterTestingModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path:'', component: WeatherDetails }
     ])
@@ -25,7 +28,7 @@ import {RouterTestingModule} from '@angular/router/testing';
   exports: [
     RouterModule
   ],
-  providers: [],
+  providers: [  { provide: HTTP_INTERCEPTORS, useClass: ServerTimingInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
